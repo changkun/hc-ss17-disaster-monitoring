@@ -60,18 +60,10 @@ We describe the system database PlayerDB
 fields as well as the fields of database ResultDB first in listing \ref{lst:playerdb}
 and \ref{lst:resultdb}.
 
-In this disaster monitoring system, our participants \textbf{do not need to register accounts},
-and the system backend shall \textbf{generate and assign an} \emph{player\_id} \textbf{to each player} according to 
-the user scenario (such as IP address, network status, system information et cetera).
-This function significantly accelerate player to participate in this game. 
-Thus, the \textbf{PlayerDB} stores the \emph{player\_id} to detect the same players if they participate next time. 
-The player will accomplish different game tasks; each task result shall store in the tasks filed.
-
-\noindent\begin{minipage}{.45\textwidth}
-\begin{lstlisting}[
-    caption={Example of PlayerDB Data},
-    label={lst:playerdb}
-]
+\begin{listing}[H]
+\refstepcounter{listing}
+\noindent\begin{minipage}[b]{.45\textwidth}
+    \begin{lstlisting}
 [
  {
   "player_id": "E3A6F124-4A6C-4C6E-B7F1-F8BC9A7381CC",
@@ -92,13 +84,13 @@ The player will accomplish different game tasks; each task result shall store in
   ]
  }
 ]
-\end{lstlisting}
-\end{minipage}\hfill
-\begin{minipage}{.45\textwidth}
-\begin{lstlisting}[
-  caption={Example of ResultsDB Data},
-  label={lst:resultdb}
-]
+    \end{lstlisting}
+    \captionof{sublisting}{Example of PlayerDB Data}
+    \label{lst:playerdb}            
+    \end{minipage}%
+    \hfill
+\begin{minipage}[b]{.45\textwidth}
+    \begin{lstlisting}
 [
  {
   "region_id": "FBEB6204-0B94-4811-94F0-9DDC5FBBE6D8",
@@ -118,8 +110,22 @@ The player will accomplish different game tasks; each task result shall store in
   ]
  }
 ]
-\end{lstlisting}
+
+    \end{lstlisting}
+    \captionof{sublisting}{Example of ResultsDB Data}
+    \label{lst:resultdb}            
 \end{minipage}
+\addtocounter{listing}{-1}
+\caption{Examples of Database Fields}
+\label{lst:codeblocks}
+\end{listing}
+
+In this disaster monitoring system, our participants \textbf{do not need to register accounts},
+and the system backend shall \textbf{generate and assign an} \emph{player\_id} \textbf{to each player} according to 
+the user scenario (such as IP address, network status, system information et cetera).
+This function significantly accelerate player to participate in this game. 
+Thus, the \textbf{PlayerDB} stores the \emph{player\_id} to detect the same players if they participate next time. 
+The player will accomplish different game tasks; each task result shall store in the tasks filed.
 
 In the \textbf{ResultDB}, a \emph{region\_id} is unique and assigned by our system. A region has its
 monitoring history and composed by its separate images, the only difference between PlayerDB and ResultDB is
@@ -694,11 +700,7 @@ Meanwhile, the trusted group and available dataset grow larger with this step re
 as shown in figure \ref{fig:cold}.
 
 Thus, the final question of our system relate to the minimum number of the initial trusted group.
-Our Player Rating Model is based on graph centrality calculation, which means we need a (at least) two dimentional matrix
+Our \hyperref[idx:prm]{PRM} is based on graph centrality calculation, which means we need a (at least) two dimentional matrix
 to perform the overall model calculation. Hence, with the new player, \textbf{the minimum number of the inital trusted group is 1}.
 Then the initial trusted group (one person) with the new player composed to a two dimentional adjacency matrix that makes the model
-computable.
-
-\subsection{Model Discussion}
-
-TODO: brief disscuss the image independent model is not suitable
+computable. For larger initial trusted groups, the \hyperref[def:tv]{Trust Value} can be simply initialized to $\frac{1}{n}$ with $n$ is the number of initial trusted group.
