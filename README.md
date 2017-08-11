@@ -15,23 +15,6 @@ This repo contains all project source files of LMU Human Computation Lecture Sum
 - Papers
   - [Final Report](report/hc_final_project_report_team_Hotpot.pdf)
 
-## TODO
-
-- [x] refine chapter 1 introduction
-- [x] review chapter 1, remove wiki references
-
-- [x] refine chapter 2 functionalities
-- [x] review chapter 2, verify incentivization
-
-- [x] refine chapter 3 design
-- [x] review chapter 3, remove wiki references
-
-- [ ] refine chapter 4 evaluation
-- [ ] review chapter 4
-
-- [x] refine chapter 5 future
-- [x] review chapter 5
-
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>

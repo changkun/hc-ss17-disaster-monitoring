@@ -18,8 +18,7 @@ our system detect the new player is reliable or not based on \hyperref[def:tv]{T
 
 To evaluate our model, a typical classification model performance evaluation metric is to 
 using the Receiver Operating Characteristic (ROC) curve \cite{hanley1982meaning}, which 
-plots True Positive (on the y-axis) against False Positive and the ideal area under the curve
-should be 1.
+plots True Positive (on the y-axis) against False Positive and the ideal \textbf{surface under the ROC curve} is 1.
 Nevertheless, before we test the system with real user, one can generate a reaonsable random dataset 
 to test the performance of our classification model (\hyperref[idx:prm]{PRM}).
 
@@ -54,40 +53,44 @@ The generation of Tag Vector for a certain image is much simple than ROI's,
 a randomly pick from initial trusted group is sufficient for the simulation case 
 because these tags are trusted results and a partial randomly selection already introduced the noise in this case.
 
-Eventually, one can perform this random dataset on the system to evaluate area under the ROC curse to
-evaluate the overall performance of this system (the model shows good performance if the value approximate to 1), 
+Eventually, one can perform this random dataset on the system to evaluate \textbf{surface under the ROC curve} to
+evaluate the overall performance of this system (the model shows good performance if the surface approximate to 1), 
 which gives the theoretical evaluation results.
 
 \subsubsection{Issues on Social and Ethical Aspects}
 \label{chapter:ethical}
 
 \textbf{Intellectual Property Rights:} 
-Our disaster monitoring HC system is an non-commercial project which invites volunteers to contribute to it. 
+Our disaster monitoring system is an non-commercial project which invites volunteers to contribute to it. 
 It is used to help the UNICEF and other non-profit organizations deliver supplies in disaster areas safer. 
 So the IPR on the annotations should not belong to the volunteer users. In an appropriate manner, user will be informed that 
 his or her contribution to the system is volunteering and the produced data will be used only for 
 monitoring disasters in Syria.
 
 \textbf{Leakage of data:} 
-We cut big satellite image into small segmentations in our \hyperref[idx:hc]{HC} system to prevent data leakage to ordinary users, 
-but the \textbf{data security} (TODO: explain here) is still very important and needs to be considered with high priority. For example, 
-the backend database should not be entirely accessible to every employee of UNICEF. 
-Each of them can only visit the part of data that they need at present. This principle is made to guarantee 
-that data will not be wrongly used and will be included in our future work.
+Malicious issues are not limited to the spite of game playing but also possible on the issue of leakage of our image data.
+Malicious players also can be terrorists, they can use these satellite image as a free attack resources 
+if we provide the entire region image to the game player, which leads to the data insecurity.
+Therefore, we cut big satellite image into small segmentations in our system to prevent data leakage to ordinary players
+for the data security reason.
 
 \textbf{Information Loss}
 We cut big region images into small fragements areas to prevent leakage of data. 
-But this method will cause some information loss problem if some important ROIs are 
+However this method will cause some information loss problem if some important ROIs are 
 located at the intersection of two dividing lines.
-A possible solution for this limitation is to consider new regions that contains the loss
-informations, as shown in figure \ref{fig:information_loss}. Note that this solution that
+A possible solution for this limitation is to consider ``Half Shifting'' cut. 
+The ``Half Shifting'' cut have two grids, 
+the one obtained from the other shift the original grid to the right and to the bottom by half the breath 
+respectively hight of a ROI, as shown in figure \ref{fig:information_loss}. Note that this solution that
 only increases the number of region pictures, it does not influence any model and system design.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\columnwidth]{figures/information_loss3}
-\caption{\textbf{Information Loss}: TODO: fix here. Information loss may occurs on the intersection lines, as shown on the left; a possible solution
-is to provide additional regions (blue rectangles) for these special area as shown on the right.}
+\caption{
+    \textbf{Information Loss}: Information loss may occurs on the intersection lines, as shown on the left; 
+    a possible solution is to perform a ``Half Shifting'' cut
+}
 \label{fig:information_loss}
 \end{figure}
 
@@ -95,30 +98,19 @@ is to provide additional regions (blue rectangles) for these special area as sho
 
 \subsubsection{Evaluation Outdated}
 
-TODO: rewrite this section, gives few time series prediction method.
+A limitation occurs in a situation that our \hyperref[idx:prg]{PRG} network is based on image dependent prespective, that leads,
+each calculated \hyperref[def:dl]{Disaster Level} get invalid if the region image is outdated.
+We assume the satellite machine monitors an region and take pictures between intervals. 
+However, our evaluation the model only calculate the disaster level at a unique moment, 
+which means the disaster level need transvaluation when a new image comes out.
+If none of all the new images from a region get evaluate, then the disaster level will not be calculated.
 
-A limitation occurs in our social network based model is each disaster level evaluation get invalid 
-if the region image is outdated. 
-We assume the satellite monitors an area and take pictures between intervals. However, our evaluation
-the model only calculate the disaster level at a unique moment, which means the disaster level need 
-transvaluation when a new image comes out.
-If our player is not enough so that the region images always have to wait for new evaluation, then the
-disaster level will never be calculated.
-
-A possible solution is to consider the region disaster level history as a time series. Then we can apply
-some prediction method for it. For instance, we have time series: $(t_1, t_2, t_3, ..., t_n)$
-and its corresponding disaster level: $(DL_1, DL_2, DL_3, ..., DL_n)$.
-Then we can use these time series to predict the disaster level at time $t_{n+1}$.
-
-At the same time, we also have the historical data of trust value of a player. We can also
-use time series prediction to predict the player's trust value. But in all of these, the time series
-of disaster level is not stationary but the time series of trust value is stationary.
-
-TODO: Fix here by given few prediction method suggestions.
+Note that the disaster level of a disaster region over time is essentially a non-stationary process \cite{brockwell2013time} 
+due to the paroxysmal disaster situation. One can directly perform time series prediction method \cite{kuznetsov2015learning}
+on the disaster level time series. 
+Unfortunately, there is no space to cover them in depth.
 
 \subsubsection{Gameplay and Playability}
-
-TODO: add image here, rewrite this paragraph.
 
 The GWAP collects satellite photos of disaster areas. But even if in the disaster areas, 
 not every part of the areas has a disaster. Most parts of the earth are lake, forest, 
